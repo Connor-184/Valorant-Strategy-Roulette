@@ -291,7 +291,7 @@ public class Main extends Application {
             if(Desktop.isDesktopSupported())
             {
                 try {
-                    Desktop.getDesktop().browse(new URI("https://github.com/Connor-184"));
+                    Desktop.getDesktop().browse(new URI("https://github.com/Connor-184/Valorant-Strategy-Roulette"));
                 } catch (IOException | URISyntaxException e1) {
                     e1.printStackTrace();
                 }
