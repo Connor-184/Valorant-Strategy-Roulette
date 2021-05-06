@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Valorant Strategy Roulette:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Valorant_Strategy_Roulette_jar</output-path>
+    <root id="archive" name="Valorant Strategy Roulette.jar">
+      <element id="module-output" name="Valorant Strategy Roulette" />
+    </root>
+  </artifact>
+</component>
