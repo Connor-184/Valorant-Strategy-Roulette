@@ -31,7 +31,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Main extends Application {
 
     Stage window;
-    Scene scene1, scene2, scene3, scene4, scene5, scene6, scene7;
 
     final int height = 1000;
     final int width = 1600;
@@ -46,27 +45,17 @@ public class Main extends Application {
 
         // Creates the different scenes and sets the primary stage
         BorderPane root1 = new BorderPane();
-        scene1 = new Scene(root1, width, height);
+        Scene scene1 = new Scene(root1, width, height);
         root1.setStyle("-fx-background-image: url('Valorant/Background.jpg');-fx-background-position: center center;" +
                 "-fx-background-repeat: stretch;");
-        BorderPane root2 = new BorderPane();
-        scene2 = new Scene(root2, width, height);
-        root2.setStyle(style);
-        BorderPane root3 = new BorderPane();
-        scene3 = new Scene(root3, width, height);
-        root3.setStyle(style);
-        BorderPane root4 = new BorderPane();
-        scene4 = new Scene(root4, width, height);
-        root4.setStyle(style);
-        BorderPane root5 = new BorderPane();
-        scene5 = new Scene(root5, width, height);
-        root5.setStyle(style);
-        BorderPane root6 = new BorderPane();
-        scene6 = new Scene(root6, width, height);
-        root6.setStyle(style);
-        BorderPane root7 = new BorderPane();
-        scene7 = new Scene(root7, width, height);
-        root7.setStyle(style);
+
+        BorderPane[] borderPanes = new BorderPane[6];
+        Scene[] scenes = new Scene[6];
+        for (int i = 0; i < borderPanes.length; i++) {
+            borderPanes[i] = new BorderPane();
+            scenes[i] = new Scene(borderPanes[i], width, height);
+            borderPanes[i].setStyle(style);
+        }
 
 
         // Root 1 TOP
@@ -116,174 +105,49 @@ public class Main extends Application {
         vbox3.setAlignment(Pos.TOP_RIGHT);
         root1.setRight(vbox3);
 
-        // Root 1 Center
+        // Github link
         ImageView github = new ImageView("Valorant/GitHub.png");
         Hyperlink hyperlink = new Hyperlink();
         hyperlink.setGraphic(github);
         hyperlink.setAlignment(Pos.CENTER);
         root1.setBottom(hyperlink);
 
-        // Root 2 Bottom
-        Button button7 = new Button("Generate Strategy");
-        button7.setMinSize(250, 75);
-        button7.setStyle("-fx-font-size: 26");
-        HBox hbox2 = new HBox(button7);
-        hbox2.setPadding(new Insets(0, 0, 100, 0));
-        hbox2.setAlignment(Pos.BOTTOM_CENTER);
-        root2.setBottom(hbox2);
 
-        // Root 2 Left
-        Label label3 = new Label("");
-        label3.setWrapText(true);
-        label3.setMaxWidth(500);
-        label3.setStyle("-fx-font-size: 30; -fx-font-weight: BOLD;-fx-text-fill: White");
-        VBox vbox4 = new VBox(label3);
-        vbox4.setPadding(new Insets(0, 0, 0, 50));
-        vbox4.setAlignment(Pos.CENTER_LEFT);
-        root2.setLeft(vbox4);
+        // "Generate Strategy" buttons
+        Button[] generateButtons = new Button[scenes.length];
+        for (int i = 0; i < generateButtons.length; i++) {
+            generateButtons[i] = new Button("Generate Strategy");
+            generateButtons[i].setMinSize(250, 75);
+            generateButtons[i].setStyle("-fx-font-size: 26");
+            HBox hbox = new HBox(generateButtons[i]);
+            hbox.setPadding(new Insets(0, 0, 100, 0));
+            hbox.setAlignment(Pos.BOTTOM_CENTER);
+            borderPanes[i].setBottom(hbox);
+        }
 
-        // Root 2 Top
-        Button button8 = new Button("Main Menu");
-        button8.setStyle("-fx-font-size: 24; -fx-font-weight: BOLD;-fx-text-fill: Black 0");
-        HBox hbox3 = new HBox(button8);
-        hbox3.setPadding(new Insets(20, 0, 0, 20));
-        hbox3.setAlignment(Pos.TOP_LEFT);
-        root2.setTop(hbox3);
+        // Strategy text
+        Label[] label = new Label[scenes.length];
+        for (int i = 0; i < label.length; i++) {
+            label[i] = new Label("");
+            label[i].setWrapText(true);
+            label[i].setMaxWidth(500);
+            label[i].setStyle("-fx-font-size: 30; -fx-font-weight: BOLD;-fx-text-fill: White");
+            VBox labelBox = new VBox(label[i]);
+            labelBox.setPadding(new Insets(0, 0, 0, 50));
+            labelBox.setAlignment(Pos.CENTER_LEFT);
+            borderPanes[i].setLeft(labelBox);
+        }
 
-        // Root 3 Bottom
-        Button button9 = new Button("Generate Strategy");
-        button9.setMinSize(250, 75);
-        button9.setStyle("-fx-font-size: 26");
-        HBox hbox4 = new HBox(button9);
-        hbox4.setPadding(new Insets(0, 0, 100, 0));
-        hbox4.setAlignment(Pos.BOTTOM_CENTER);
-        root3.setBottom(hbox4);
-
-        // Root 3 Left
-        Label label4 = new Label("");
-        label4.setWrapText(true);
-        label4.setMaxWidth(500);
-        label4.setStyle("-fx-font-size: 30; -fx-font-weight: BOLD;-fx-text-fill: White");
-        VBox vbox5 = new VBox(label4);
-        vbox5.setPadding(new Insets(0, 0, 0, 50));
-        vbox5.setAlignment(Pos.CENTER_LEFT);
-        root3.setLeft(vbox5);
-
-        // Root 3 Top
-        Button button10 = new Button("Main Menu");
-        button10.setStyle("-fx-font-size: 24; -fx-font-weight: BOLD;-fx-text-fill: Black 0");
-        HBox hbox5 = new HBox(button10);
-        hbox5.setPadding(new Insets(20, 0, 0, 20));
-        hbox5.setAlignment(Pos.TOP_LEFT);
-        root3.setTop(hbox5);
-
-        // Root 4 Bottom
-        Button button11 = new Button("Generate Strategy");
-        button11.setMinSize(250, 75);
-        button11.setStyle("-fx-font-size: 26");
-        HBox hbox6 = new HBox(button11);
-        hbox6.setPadding(new Insets(0, 0, 100, 0));
-        hbox6.setAlignment(Pos.BOTTOM_CENTER);
-        root4.setBottom(hbox6);
-
-        // Root 4 Left
-        Label label5 = new Label("");
-        label5.setWrapText(true);
-        label5.setMaxWidth(500);
-        label5.setStyle("-fx-font-size: 30; -fx-font-weight: BOLD;-fx-text-fill: White");
-        VBox vbox6 = new VBox(label5);
-        vbox6.setPadding(new Insets(0, 0, 0, 50));
-        vbox6.setAlignment(Pos.CENTER_LEFT);
-        root4.setLeft(vbox6);
-
-        // Root 4 Top
-        Button button12 = new Button("Main Menu");
-        button12.setStyle("-fx-font-size: 24; -fx-font-weight: BOLD;-fx-text-fill: Black 0");
-        HBox hbox7 = new HBox(button12);
-        hbox7.setPadding(new Insets(20, 0, 0, 20));
-        hbox7.setAlignment(Pos.TOP_LEFT);
-        root4.setTop(hbox7);
-
-        // Root 5 Bottom
-        Button button13 = new Button("Generate Strategy");
-        button13.setMinSize(250, 75);
-        button13.setStyle("-fx-font-size: 26");
-        HBox hbox8 = new HBox(button13);
-        hbox8.setPadding(new Insets(0, 0, 100, 0));
-        hbox8.setAlignment(Pos.BOTTOM_CENTER);
-        root5.setBottom(hbox8);
-
-        // Root 5 Left
-        Label label6 = new Label("");
-        label6.setWrapText(true);
-        label6.setMaxWidth(500);
-        label6.setStyle("-fx-font-size: 30; -fx-font-weight: BOLD;-fx-text-fill: White");
-        VBox vbox7 = new VBox(label6);
-        vbox7.setPadding(new Insets(0, 0, 0, 50));
-        vbox7.setAlignment(Pos.CENTER_LEFT);
-        root5.setLeft(vbox7);
-
-        // Root 5 Top
-        Button button14 = new Button("Main Menu");
-        button14.setStyle("-fx-font-size: 24; -fx-font-weight: BOLD;-fx-text-fill: Black 0");
-        HBox hbox9 = new HBox(button14);
-        hbox9.setPadding(new Insets(20, 0, 0, 20));
-        hbox9.setAlignment(Pos.TOP_LEFT);
-        root5.setTop(hbox9);
-
-        // Root 6 Bottom
-        Button button15 = new Button("Generate Strategy");
-        button15.setMinSize(250, 75);
-        button15.setStyle("-fx-font-size: 26");
-        HBox hbox10 = new HBox(button15);
-        hbox10.setPadding(new Insets(0, 0, 100, 0));
-        hbox10.setAlignment(Pos.BOTTOM_CENTER);
-        root6.setBottom(hbox10);
-
-        // Root 6 Left
-        Label label7 = new Label("");
-        label7.setWrapText(true);
-        label7.setMaxWidth(500);
-        label7.setStyle("-fx-font-size: 30; -fx-font-weight: BOLD;-fx-text-fill: White");
-        VBox vbox8 = new VBox(label7);
-        vbox8.setPadding(new Insets(0, 0, 0, 50));
-        vbox8.setAlignment(Pos.CENTER_LEFT);
-        root6.setLeft(vbox8);
-
-        // Root 6 Top
-        Button button16 = new Button("Main Menu");
-        button16.setStyle("-fx-font-size: 24; -fx-font-weight: BOLD;-fx-text-fill: Black 0");
-        HBox hbox11 = new HBox(button16);
-        hbox11.setPadding(new Insets(20, 0, 0, 20));
-        hbox11.setAlignment(Pos.TOP_LEFT);
-        root6.setTop(hbox11);
-
-        // Root 7 Top
-        Button button18 = new Button("Main Menu");
-        button18.setStyle("-fx-font-size: 24; -fx-font-weight: BOLD;-fx-text-fill: Black 0");
-        HBox hbox12 = new HBox(button18);
-        hbox12.setPadding(new Insets(20, 0, 0, 20));
-        hbox12.setAlignment(Pos.TOP_LEFT);
-        root7.setTop(hbox12);
-
-        // Root 7 Bottom
-        Button button19 = new Button("Generate Strategy");
-        button19.setMinSize(250, 75);
-        button19.setStyle("-fx-font-size: 26");
-        HBox hbox13 = new HBox(button19);
-        hbox13.setPadding(new Insets(0, 0, 100, 0));
-        hbox13.setAlignment(Pos.BOTTOM_CENTER);
-        root7.setBottom(hbox13);
-
-        // Root 7 Left
-        Label label8 = new Label("");
-        label8.setWrapText(true);
-        label8.setMaxWidth(500);
-        label8.setStyle("-fx-font-size: 30; -fx-font-weight: BOLD;-fx-text-fill: White");
-        VBox vbox9 = new VBox(label8);
-        vbox9.setPadding(new Insets(0, 0, 0, 50));
-        vbox9.setAlignment(Pos.CENTER_LEFT);
-        root7.setLeft(vbox9);
+        // Main Menu buttons
+        Button[] mainMenuButtons = new Button[scenes.length];
+        for (int i = 0; i < scenes.length; i++) {
+            mainMenuButtons[i] = new Button("Main Menu");
+            mainMenuButtons[i].setStyle("-fx-font-size: 24; -fx-font-weight: BOLD;-fx-text-fill: Black 0");
+            HBox hbox = new HBox(mainMenuButtons[i]);
+            hbox.setPadding(new Insets(20, 0, 0, 20));
+            hbox.setAlignment(Pos.TOP_LEFT);
+            borderPanes[i].setTop(hbox);
+        }
 
 
         // Event handler for hyperlink
@@ -300,95 +164,93 @@ public class Main extends Application {
 
 
         // Button handlers for scene changes
-        button1.setOnAction(event -> window.setScene(scene2));
-        button2.setOnAction(event -> window.setScene(scene3));
-        button3.setOnAction(event -> window.setScene(scene4));
-        button4.setOnAction(event -> window.setScene(scene5));
-        button5.setOnAction(event -> window.setScene(scene6));
-        button17.setOnAction(event -> window.setScene(scene7));
-        button8.setOnAction(event -> window.setScene(scene1));
-        button10.setOnAction(event -> window.setScene(scene1));
-        button12.setOnAction(event -> window.setScene(scene1));
-        button14.setOnAction(event -> window.setScene(scene1));
-        button16.setOnAction(event -> window.setScene(scene1));
-        button18.setOnAction(event -> window.setScene(scene1));
+        button1.setOnAction(event -> window.setScene(scenes[0]));
+        button2.setOnAction(event -> window.setScene(scenes[1]));
+        button3.setOnAction(event -> window.setScene(scenes[2]));
+        button4.setOnAction(event -> window.setScene(scenes[3]));
+        button5.setOnAction(event -> window.setScene(scenes[4]));
+        button17.setOnAction(event -> window.setScene(scenes[5]));
+        for (Button mainMenuButton : mainMenuButtons) {
+            mainMenuButton.setOnAction(event -> window.setScene(scene1));
+        }
+
 
         // Button handlers for generating strats/memes
-        button7.setOnAction(event -> {
+        generateButtons[0].setOnAction(event -> {
             Image meme = getMeme(numMemes);
             ImageView imageView = new ImageView(meme);
             HBox hbox = new HBox(imageView);
             hbox.setAlignment(Pos.CENTER_RIGHT);
             hbox.setPadding(new Insets(0, 50, 0, 0));
-            root2.setRight(hbox);
+            borderPanes[0].setRight(hbox);
             if (isMS()) {
-                label3.setText(getSplitStrat());
+                label[0].setText(getSplitStrat());
             } else {
-                label3.setText(getGenStrat());
+                label[0].setText(getGenStrat());
             }
 
         });
-        button9.setOnAction(event -> {
+        generateButtons[1].setOnAction(event -> {
             Image meme = getMeme(numMemes);
             ImageView imageView = new ImageView(meme);
             HBox hbox = new HBox(imageView);
             hbox.setAlignment(Pos.CENTER_RIGHT);
             hbox.setPadding(new Insets(0, 50, 0, 0));
-            root3.setRight(hbox);
+            borderPanes[1].setRight(hbox);
             if (isMS()) {
-                label4.setText(getBindStrat());
+                label[1].setText(getBindStrat());
             } else {
-                label4.setText(getGenStrat());
+                label[1].setText(getGenStrat());
             }
         });
-        button11.setOnAction(event -> {
+        generateButtons[2].setOnAction(event -> {
             Image meme = getMeme(numMemes);
             ImageView imageView = new ImageView(meme);
             HBox hbox = new HBox(imageView);
             hbox.setAlignment(Pos.CENTER_RIGHT);
             hbox.setPadding(new Insets(0, 50, 0, 0));
-            root4.setRight(hbox);
+            borderPanes[2].setRight(hbox);
             if (isMS()) {
-                label5.setText(getAscentStrat());
+                label[2].setText(getAscentStrat());
             } else {
-                label5.setText(getGenStrat());
+                label[2].setText(getGenStrat());
             }
         });
-        button13.setOnAction(event -> {
+        generateButtons[3].setOnAction(event -> {
             Image meme = getMeme(numMemes);
             ImageView imageView = new ImageView(meme);
             HBox hbox = new HBox(imageView);
             hbox.setAlignment(Pos.CENTER_RIGHT);
             hbox.setPadding(new Insets(0, 50, 0, 0));
-            root5.setRight(hbox);
+            borderPanes[3].setRight(hbox);
             if (isMS()) {
-                label6.setText(getHavenStrat());
+                label[3].setText(getHavenStrat());
             } else {
-                label6.setText(getGenStrat());
+                label[3].setText(getGenStrat());
             }
 
         });
-        button15.setOnAction(event -> {
+        generateButtons[4].setOnAction(event -> {
             Image meme = getMeme(numMemes);
             ImageView imageView = new ImageView(meme);
             HBox hbox = new HBox(imageView);
             hbox.setAlignment(Pos.CENTER_RIGHT);
             hbox.setPadding(new Insets(0, 50, 0, 0));
-            root6.setRight(hbox);
+            borderPanes[4].setRight(hbox);
             if (isMS()) {
-                label7.setText(getIceboxStrat());
+                label[4].setText(getIceboxStrat());
             } else {
-                label7.setText(getGenStrat());
+                label[4].setText(getGenStrat());
             }
         });
-        button19.setOnAction(event -> {
+        generateButtons[5].setOnAction(event -> {
             Image meme = getMeme(numMemes);
             ImageView imageView = new ImageView(meme);
             HBox hbox = new HBox(imageView);
             hbox.setAlignment(Pos.CENTER_RIGHT);
             hbox.setPadding(new Insets(0, 50, 0, 0));
-            root7.setRight(hbox);
-            label8.setText(getGenStrat());
+            borderPanes[5].setRight(hbox);
+            label[5].setText(getGenStrat());
 
         });
 
