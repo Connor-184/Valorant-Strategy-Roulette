@@ -250,7 +250,11 @@ public class Main extends Application {
             hbox.setPadding(new Insets(0, 50, 0, 0));
             borderPanes[3].setRight(hbox);
             if (isMS()) {
-                label[3].setText(getHavenStrat());
+                try {
+                    label[3].setText(getHavenStrat());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             } else {
                 try {
                     label[3].setText(getGenStrat());
@@ -412,14 +416,22 @@ public class Main extends Application {
     /**
      * Returns a random map-specific strategy for Haven
      */
-    private static String getHavenStrat() {
-        final String[] havenStrats = { "Everyone on your team must sit in B site. Nobody is allowed to leave until either the spike is planted or there is 45 seconds left in the round",
-                "Everyone must push C long with either a Marshall or and Operator.",
-                "While there are 3 or more players alive, there must be at least one player on every site at all times.",
-                "Convince the enemy team to have a knife fight at B site",
-                "Nobody is allowed to set foot on B site. If you are defending and the bomb is planted at B you may enter B site only after every enemy is killed"
+    private static String getHavenStrat() throws FileNotFoundException {
+        int counter = 0;
+        File file = new File("Haven Strats.txt");
+        Scanner scan = new Scanner(file);
+        Scanner scan2 = new Scanner(file);
 
-        };
+        while (scan2.hasNextLine()) {
+            scan2.nextLine();
+            counter++;
+        }
+
+        String[] havenStrats = new String[counter - 1];
+        for (int i = 0; i < havenStrats.length; i++) {
+            havenStrats[i] = scan.nextLine();
+        }
+
         int num = ThreadLocalRandom.current().nextInt(0, havenStrats.length + 1);
         if (num < havenStrats.length) {
             return havenStrats[num];
