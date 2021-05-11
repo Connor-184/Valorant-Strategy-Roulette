@@ -208,7 +208,11 @@ public class Main extends Application {
             hbox.setPadding(new Insets(0, 50, 0, 0));
             borderPanes[1].setRight(hbox);
             if (isMS()) {
-                label[1].setText(getBindStrat());
+                try {
+                    label[1].setText(getBindStrat());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             } else {
                 try {
                     label[1].setText(getGenStrat());
@@ -382,15 +386,22 @@ public class Main extends Application {
     /**
      * Returns a random map-specific strategy for Bind.
      */
-    private static String getBindStrat() {
-        final String[] bindStrats = { "Everybody on the team must teleport at least once before anyone is allowed to shoot",
-                "There must be one person inside of a teleporter at all times unless you are the last one alive",
-                "Nobody on your team is allowed to use any teleporters this round",
-                "Everytime you kill someone, you must use a teleporter before you can get another kill",
-                "If you see an enemy use the teleporter, you must prioritize killing that enemy before killing anyone else"
+    private static String getBindStrat() throws FileNotFoundException {
+        int counter = 0;
+        File file = new File("Bind Strats.txt");
+        Scanner scan = new Scanner(file);
+        Scanner scan2 = new Scanner(file);
 
+        while (scan2.hasNextLine()) {
+            scan2.nextLine();
+            counter++;
+        }
 
-        };
+        String[] bindStrats = new String[counter - 1];
+        for (int i = 0; i < bindStrats.length; i++) {
+            bindStrats[i] = scan.nextLine();
+        }
+
         int num = ThreadLocalRandom.current().nextInt(0, bindStrats.length + 1);
         if (num < bindStrats.length) {
             return bindStrats[num];
