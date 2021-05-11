@@ -272,7 +272,11 @@ public class Main extends Application {
             hbox.setPadding(new Insets(0, 50, 0, 0));
             borderPanes[4].setRight(hbox);
             if (isMS()) {
-                label[4].setText(getIceboxStrat());
+                try {
+                    label[4].setText(getIceboxStrat());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             } else {
                 try {
                     label[4].setText(getGenStrat());
@@ -442,14 +446,24 @@ public class Main extends Application {
     /**
      * Returns a random map-specific strategy for Icebox
      */
-    private static String getIceboxStrat() {
-        final String[] iceboxStrats = { "Everytime you shoot or use an ability you must say \" Fuck icebox, all my homies hate icebox!\"",
-                "When on A site, you can only kill enemies while you are attached to a rope",
-                "You may only enter one single building. For example, If you enter A building cannot enter any other building like tube or kitchen",
-                "You must travel though mid before entering any site. This includes tubes.",
-                "Fuck Icebox just throw the round"
+    private static String getIceboxStrat() throws FileNotFoundException {
 
-        };
+        int counter = 0;
+        File file = new File("Icebox Strats.txt");
+        Scanner scan = new Scanner(file);
+        Scanner scan2 = new Scanner(file);
+
+        while (scan2.hasNextLine()) {
+            scan2.nextLine();
+            counter++;
+        }
+
+        String[] iceboxStrats = new String[counter - 1];
+        for (int i = 0; i < iceboxStrats.length; i++) {
+            iceboxStrats[i] = scan.nextLine();
+        }
+
+
         int num = ThreadLocalRandom.current().nextInt(0, iceboxStrats.length + 1);
         if (num < iceboxStrats.length) {
             return iceboxStrats[num];

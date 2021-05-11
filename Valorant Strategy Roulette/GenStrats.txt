@@ -32,7 +32,7 @@ Choose a player, they are the only person allowed to buy armor/abilities for thi
 Everyone on the team must play the round with their face 6 inches from their monitors
 You can only use one hand at a time, you cannot move the mouse while pressing any keys and vice versa.
 Nobody on the team is allowed to stop sprinting. No walking or crouching
-After each kill you must praise a different country for that kill. Example: \"This was for MEXICO!!\"
+After each kill you must praise a different country for that kill. Example: "This was for MEXICO!!"
 Choose one player. Players may only move when this player is singing
 Only players who are dead may use comms, nobody else is allowed to speak
 Everyone must set their sensitivity to max
