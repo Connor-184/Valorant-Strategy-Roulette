@@ -225,7 +225,11 @@ public class Main extends Application {
             hbox.setPadding(new Insets(0, 50, 0, 0));
             borderPanes[2].setRight(hbox);
             if (isMS()) {
-                label[2].setText(getAscentStrat());
+                try {
+                    label[2].setText(getAscentStrat());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             } else {
                 try {
                     label[2].setText(getGenStrat());
@@ -351,14 +355,23 @@ public class Main extends Application {
     /**
      * Returns a random map-specific strategy for Ascent.
      */
-    private static String getAscentStrat() {
-        final String[] ascentStrats = {"The bomb may not be planted or defused until both doors are either closed or destroyed",
-                "Nobody is allowed to use garage or A-Long to get to each site",
-                "Once you physically step foot onto a site, you are not allowed to leave",
-                "You must defend the market from any potential robbers, keep any enemies outside of market",
-                "You must defend your brand new Lamborghini from the delinquents on the enemy team. Keep all enemies out of garage for the whole round."
+    private static String getAscentStrat() throws FileNotFoundException {
 
-        };
+        int counter = 0;
+        File file = new File("Ascent Strats.txt");
+        Scanner scan = new Scanner(file);
+        Scanner scan2 = new Scanner(file);
+
+        while (scan2.hasNextLine()) {
+            scan2.nextLine();
+            counter++;
+        }
+
+        String[] ascentStrats = new String[counter - 1];
+        for (int i = 0; i < ascentStrats.length; i++) {
+            ascentStrats[i] = scan.nextLine();
+        }
+
         int num = ThreadLocalRandom.current().nextInt(0, ascentStrats.length + 1);
         if (num < ascentStrats.length) {
             return ascentStrats[num];
