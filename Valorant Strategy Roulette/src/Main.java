@@ -26,7 +26,7 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * Version 2.0
  *
- * Known bugs:
+ * There are currently no map-specific strategies for Breeze.
  *
  * @author Connor McNally
  */
@@ -40,7 +40,7 @@ public class Main extends Application {
     int numMemes = 45;
 
     @Override
-    public void start(Stage primaryStage) throws FileNotFoundException {
+    public void start(Stage primaryStage) {
 
         // Sets root style
         String style = "-fx-background-image: url('Valorant/Background2.jpg');-fx-background-position: center center;" +
@@ -186,7 +186,11 @@ public class Main extends Application {
             hbox.setPadding(new Insets(0, 50, 0, 0));
             borderPanes[0].setRight(hbox);
             if (isMS()) {
-                label[0].setText(getSplitStrat());
+                try {
+                    label[0].setText(getSplitStrat());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             } else {
                 try {
                     label[0].setText(getGenStrat());
@@ -319,11 +323,23 @@ public class Main extends Application {
     /**
      * Returns a random map-specific strategy for Split.
      */
-    private static String getSplitStrat() {
-        final String[] splitStrats = { "Nobody is allowed to use any ropes",
-                "Your team must hold B site strictly from Heaven",
-                ""
-        };
+    private static String getSplitStrat() throws FileNotFoundException {
+
+        int counter = 0;
+        File file = new File("Split Strats.txt");
+        Scanner scan = new Scanner(file);
+        Scanner scan2 = new Scanner(file);
+
+        while (scan2.hasNextLine()) {
+            scan2.nextLine();
+            counter++;
+        }
+
+        String[] splitStrats = new String[counter - 1];
+        for (int i = 0; i < splitStrats.length; i++) {
+            splitStrats[i] = scan.nextLine();
+        }
+
         int num = ThreadLocalRandom.current().nextInt(0, splitStrats.length + 1);
         if (num < splitStrats.length) {
             return splitStrats[num];
