@@ -1,5 +1,5 @@
 # Valorant-Strategy-Roulette
-Basic interactive GUI that allows the user to play varied version of Strategy Roulette
+Basic interactive GUI that allows the user to play Strategy Roulette
 Java Runtime Environment (JRE) is required to run the application
 ----------------------------------------------------------------------------------------
 How to add/remove/change strategies:
