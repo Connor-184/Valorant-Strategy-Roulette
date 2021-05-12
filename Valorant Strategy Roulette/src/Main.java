@@ -13,12 +13,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.awt.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -188,13 +185,13 @@ public class Main extends Application {
             if (isMS()) {
                 try {
                     label[0].setText(getSplitStrat());
-                } catch (FileNotFoundException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
                 try {
                     label[0].setText(getGenStrat());
-                } catch (FileNotFoundException e) {
+                } catch (URISyntaxException | IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -210,13 +207,13 @@ public class Main extends Application {
             if (isMS()) {
                 try {
                     label[1].setText(getBindStrat());
-                } catch (FileNotFoundException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
                 try {
                     label[1].setText(getGenStrat());
-                } catch (FileNotFoundException e) {
+                } catch (URISyntaxException | IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -231,13 +228,13 @@ public class Main extends Application {
             if (isMS()) {
                 try {
                     label[2].setText(getAscentStrat());
-                } catch (FileNotFoundException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
                 try {
                     label[2].setText(getGenStrat());
-                } catch (FileNotFoundException e) {
+                } catch (URISyntaxException | IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -252,13 +249,13 @@ public class Main extends Application {
             if (isMS()) {
                 try {
                     label[3].setText(getHavenStrat());
-                } catch (FileNotFoundException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
                 try {
                     label[3].setText(getGenStrat());
-                } catch (FileNotFoundException e) {
+                } catch (URISyntaxException | IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -274,13 +271,13 @@ public class Main extends Application {
             if (isMS()) {
                 try {
                     label[4].setText(getIceboxStrat());
-                } catch (FileNotFoundException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
                 try {
                     label[4].setText(getGenStrat());
-                } catch (FileNotFoundException e) {
+                } catch (URISyntaxException | IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -294,7 +291,7 @@ public class Main extends Application {
             borderPanes[5].setRight(hbox);
             try {
                 label[5].setText(getGenStrat());
-            } catch (FileNotFoundException e) {
+            } catch (URISyntaxException | IOException e) {
                 e.printStackTrace();
             }
 
@@ -311,21 +308,18 @@ public class Main extends Application {
     /**
      * Returns a random general strategy.
      */
-    private static String getGenStrat() throws FileNotFoundException {
+    private static String getGenStrat() throws IOException, URISyntaxException {
         int counter = 0;
-        File file = new File("GenStrats.txt");
-        Scanner scan = new Scanner(file);
-        Scanner scan2 = new Scanner(file);
+        BufferedReader txtReader = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/GenStrats.txt")));
+        BufferedReader txtReader2 = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/GenStrats.txt")));
 
-        while (scan2.hasNextLine()) {
-            scan2.nextLine();
-            counter++;
+        while (txtReader2.readLine() != null) counter++;
+
+        String[] strategies = new String[counter];
+        for (int i = 0; i < counter; i++) {
+            strategies[i] = txtReader.readLine();
         }
 
-        String[] strategies = new String[counter - 1];
-        for (int i = 0; i < strategies.length; i++) {
-               strategies[i] = scan.nextLine();
-           }
 
         int num = ThreadLocalRandom.current().nextInt(0, strategies.length + 1);
 
@@ -339,21 +333,17 @@ public class Main extends Application {
     /**
      * Returns a random map-specific strategy for Split.
      */
-    private static String getSplitStrat() throws FileNotFoundException {
+    private static String getSplitStrat() throws IOException {
 
         int counter = 0;
-        File file = new File("Split Strats.txt");
-        Scanner scan = new Scanner(file);
-        Scanner scan2 = new Scanner(file);
+        BufferedReader txtReader = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Split Strats.txt")));
+        BufferedReader txtReader2 = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Split Strats.txt")));
 
-        while (scan2.hasNextLine()) {
-            scan2.nextLine();
-            counter++;
-        }
+        while (txtReader2.readLine() != null) counter++;
 
-        String[] splitStrats = new String[counter - 1];
-        for (int i = 0; i < splitStrats.length; i++) {
-            splitStrats[i] = scan.nextLine();
+        String[] splitStrats = new String[counter];
+        for (int i = 0; i < counter; i++) {
+            splitStrats[i] = txtReader.readLine();
         }
 
         int num = ThreadLocalRandom.current().nextInt(0, splitStrats.length + 1);
@@ -367,21 +357,17 @@ public class Main extends Application {
     /**
      * Returns a random map-specific strategy for Ascent.
      */
-    private static String getAscentStrat() throws FileNotFoundException {
+    private static String getAscentStrat() throws IOException {
 
         int counter = 0;
-        File file = new File("Ascent Strats.txt");
-        Scanner scan = new Scanner(file);
-        Scanner scan2 = new Scanner(file);
+        BufferedReader txtReader = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Ascent Strats.txt")));
+        BufferedReader txtReader2 = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Ascent Strats.txt")));
 
-        while (scan2.hasNextLine()) {
-            scan2.nextLine();
-            counter++;
-        }
+        while (txtReader2.readLine() != null) counter++;
 
-        String[] ascentStrats = new String[counter - 1];
-        for (int i = 0; i < ascentStrats.length; i++) {
-            ascentStrats[i] = scan.nextLine();
+        String[] ascentStrats = new String[counter];
+        for (int i = 0; i < counter; i++) {
+            ascentStrats[i] = txtReader.readLine();
         }
 
         int num = ThreadLocalRandom.current().nextInt(0, ascentStrats.length + 1);
@@ -394,20 +380,16 @@ public class Main extends Application {
     /**
      * Returns a random map-specific strategy for Bind.
      */
-    private static String getBindStrat() throws FileNotFoundException {
+    private static String getBindStrat() throws IOException {
         int counter = 0;
-        File file = new File("Bind Strats.txt");
-        Scanner scan = new Scanner(file);
-        Scanner scan2 = new Scanner(file);
+        BufferedReader txtReader = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Bind Strats.txt")));
+        BufferedReader txtReader2 = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Bind Strats.txt")));
 
-        while (scan2.hasNextLine()) {
-            scan2.nextLine();
-            counter++;
-        }
+        while (txtReader2.readLine() != null) counter++;
 
-        String[] bindStrats = new String[counter - 1];
-        for (int i = 0; i < bindStrats.length; i++) {
-            bindStrats[i] = scan.nextLine();
+        String[] bindStrats = new String[counter];
+        for (int i = 0; i < counter; i++) {
+            bindStrats[i] = txtReader.readLine();
         }
 
         int num = ThreadLocalRandom.current().nextInt(0, bindStrats.length + 1);
@@ -420,20 +402,16 @@ public class Main extends Application {
     /**
      * Returns a random map-specific strategy for Haven
      */
-    private static String getHavenStrat() throws FileNotFoundException {
+    private static String getHavenStrat() throws IOException {
         int counter = 0;
-        File file = new File("Haven Strats.txt");
-        Scanner scan = new Scanner(file);
-        Scanner scan2 = new Scanner(file);
+        BufferedReader txtReader = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Haven Strats.txt")));
+        BufferedReader txtReader2 = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Haven Strats.txt")));
 
-        while (scan2.hasNextLine()) {
-            scan2.nextLine();
-            counter++;
-        }
+        while (txtReader2.readLine() != null) counter++;
 
-        String[] havenStrats = new String[counter - 1];
-        for (int i = 0; i < havenStrats.length; i++) {
-            havenStrats[i] = scan.nextLine();
+        String[] havenStrats = new String[counter];
+        for (int i = 0; i < counter; i++) {
+            havenStrats[i] = txtReader.readLine();
         }
 
         int num = ThreadLocalRandom.current().nextInt(0, havenStrats.length + 1);
@@ -446,21 +424,17 @@ public class Main extends Application {
     /**
      * Returns a random map-specific strategy for Icebox
      */
-    private static String getIceboxStrat() throws FileNotFoundException {
+    private static String getIceboxStrat() throws IOException {
 
         int counter = 0;
-        File file = new File("Icebox Strats.txt");
-        Scanner scan = new Scanner(file);
-        Scanner scan2 = new Scanner(file);
+        BufferedReader txtReader = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Icebox Strats.txt")));
+        BufferedReader txtReader2 = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Icebox Strats.txt")));
 
-        while (scan2.hasNextLine()) {
-            scan2.nextLine();
-            counter++;
-        }
+        while (txtReader2.readLine() != null) counter++;
 
-        String[] iceboxStrats = new String[counter - 1];
-        for (int i = 0; i < iceboxStrats.length; i++) {
-            iceboxStrats[i] = scan.nextLine();
+        String[] iceboxStrats = new String[counter];
+        for (int i = 0; i < counter; i++) {
+            iceboxStrats[i] = txtReader.readLine();
         }
 
 
