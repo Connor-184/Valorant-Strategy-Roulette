@@ -1,5 +1,4 @@
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -61,7 +60,6 @@ public class Main extends Application {
             borderPanes[i].setStyle(style);
         }
 
-
         // Root 1 TOP
         Label label1 = new Label("");
         label1.setStyle("-fx-font-size: 26; -fx-font-weight: BOLD;-fx-text-fill: White");
@@ -88,7 +86,6 @@ public class Main extends Application {
         vbox2.getChildren().addAll(button1, button2, button5);
         vbox2.setAlignment(Pos.TOP_LEFT);
         root1.setLeft(vbox2);
-
 
         // Root 1 RIGHT
         Button button3 = new Button();
@@ -137,15 +134,12 @@ public class Main extends Application {
         button17.addEventHandler(MouseEvent.MOUSE_EXITED,
                 e -> button17.setEffect(null));
 
-
-
         // Github link
         ImageView github = new ImageView("Valorant/GitHub.png");
         Hyperlink hyperlink = new Hyperlink();
         hyperlink.setGraphic(github);
         hyperlink.setAlignment(Pos.CENTER);
         root1.setBottom(hyperlink);
-
 
         // "Generate Strategy" buttons
         Button[] generateButtons = new Button[scenes.length];
@@ -195,7 +189,6 @@ public class Main extends Application {
             }
         });
 
-
         // Button handlers for scene changes
         button1.setOnAction(event -> window.setScene(scenes[0]));
         button2.setOnAction(event -> window.setScene(scenes[1]));
@@ -206,7 +199,6 @@ public class Main extends Application {
         for (Button mainMenuButton : mainMenuButtons) {
             mainMenuButton.setOnAction(event -> window.setScene(scene1));
         }
-
 
         // Button handlers for generating strats/memes
         generateButtons[0].setOnAction(event -> {
@@ -354,7 +346,6 @@ public class Main extends Application {
             strategies[i] = txtReader.readLine();
         }
 
-
         int num = ThreadLocalRandom.current().nextInt(0, strategies.length + 1);
 
         if (num < strategies.length) {
@@ -411,6 +402,7 @@ public class Main extends Application {
             return ascentStrats[ascentStrats.length - 1];
         }
     }
+
     /**
      * Returns a random map-specific strategy for Bind.
      */
@@ -433,6 +425,7 @@ public class Main extends Application {
             return bindStrats[bindStrats.length - 1];
         }
     }
+
     /**
      * Returns a random map-specific strategy for Haven
      */
@@ -455,6 +448,7 @@ public class Main extends Application {
             return havenStrats[havenStrats.length - 1];
         }
     }
+
     /**
      * Returns a random map-specific strategy for Icebox
      */
@@ -470,7 +464,6 @@ public class Main extends Application {
         for (int i = 0; i < counter; i++) {
             iceboxStrats[i] = txtReader.readLine();
         }
-
 
         int num = ThreadLocalRandom.current().nextInt(0, iceboxStrats.length + 1);
         if (num < iceboxStrats.length) {
@@ -494,6 +487,9 @@ public class Main extends Application {
 
     }
 
+    /**
+     * Returns a boolean with a 1 in 5 chance of being true.
+     */
     public static boolean isMS() {
         int numCheck = ThreadLocalRandom.current().nextInt(1, 6);
         return numCheck == 5;
