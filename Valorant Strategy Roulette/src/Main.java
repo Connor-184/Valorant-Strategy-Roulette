@@ -1,15 +1,19 @@
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -104,6 +108,36 @@ public class Main extends Application {
         vbox3.getChildren().addAll(button3, button4, button17);
         vbox3.setAlignment(Pos.TOP_RIGHT);
         root1.setRight(vbox3);
+
+        DropShadow dropShadow = new DropShadow(25, Color.RED);
+
+        // Adds drop shadows to buttons on hover
+        button1.addEventHandler(MouseEvent.MOUSE_ENTERED,
+                e -> button1.setEffect(dropShadow));
+        button1.addEventHandler(MouseEvent.MOUSE_EXITED,
+                e -> button1.setEffect(null));
+        button2.addEventHandler(MouseEvent.MOUSE_ENTERED,
+                e -> button2.setEffect(dropShadow));
+        button2.addEventHandler(MouseEvent.MOUSE_EXITED,
+                e -> button2.setEffect(null));
+        button3.addEventHandler(MouseEvent.MOUSE_ENTERED,
+                e -> button3.setEffect(dropShadow));
+        button3.addEventHandler(MouseEvent.MOUSE_EXITED,
+                e -> button3.setEffect(null));
+        button4.addEventHandler(MouseEvent.MOUSE_ENTERED,
+                e -> button4.setEffect(dropShadow));
+        button4.addEventHandler(MouseEvent.MOUSE_EXITED,
+                e -> button4.setEffect(null));
+        button5.addEventHandler(MouseEvent.MOUSE_ENTERED,
+                e -> button5.setEffect(dropShadow));
+        button5.addEventHandler(MouseEvent.MOUSE_EXITED,
+                e -> button5.setEffect(null));
+        button17.addEventHandler(MouseEvent.MOUSE_ENTERED,
+                e -> button17.setEffect(dropShadow));
+        button17.addEventHandler(MouseEvent.MOUSE_EXITED,
+                e -> button17.setEffect(null));
+
+
 
         // Github link
         ImageView github = new ImageView("Valorant/GitHub.png");
