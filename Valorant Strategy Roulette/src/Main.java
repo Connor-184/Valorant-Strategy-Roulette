@@ -14,12 +14,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.awt.*;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Objects;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.concurrent.ThreadLocalRandom;
+
 
 /**
  * An interactive GUI that allows the user to play Strategy Roulette in Valorant.
@@ -40,7 +45,7 @@ public class Main extends Application {
     int numMemes = 45;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
 
         // Creates the different scenes and sets the primary stage
         BorderPane root1 = new BorderPane();
@@ -179,6 +184,10 @@ public class Main extends Application {
             mainMenuButtons[i].setId("mainMenuButtons" + i);
         }
 
+            String first = "resources/Strats.json";
+            String contents = new String(Files.readAllBytes(Paths.get(first)));
+            JSONObject jsonObject = new JSONObject(contents);
+
         // Event handler for hyperlink
         hyperlink.setOnAction(event -> {
             if(Desktop.isDesktopSupported())
@@ -212,13 +221,13 @@ public class Main extends Application {
             borderPanes[0].setRight(hbox);
             if (isMS()) {
                 try {
-                    label[0].setText(getSplitStrat());
+                    label[0].setText(getSplitStrat(jsonObject));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
                 try {
-                    label[0].setText(getGenStrat());
+                    label[0].setText(getGenStrat(jsonObject));
                 } catch (URISyntaxException | IOException e) {
                     e.printStackTrace();
                 }
@@ -234,13 +243,13 @@ public class Main extends Application {
             borderPanes[1].setRight(hbox);
             if (isMS()) {
                 try {
-                    label[1].setText(getBindStrat());
+                    label[1].setText(getBindStrat(jsonObject));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
                 try {
-                    label[1].setText(getGenStrat());
+                    label[1].setText(getGenStrat(jsonObject));
                 } catch (URISyntaxException | IOException e) {
                     e.printStackTrace();
                 }
@@ -255,13 +264,13 @@ public class Main extends Application {
             borderPanes[2].setRight(hbox);
             if (isMS()) {
                 try {
-                    label[2].setText(getAscentStrat());
+                    label[2].setText(getAscentStrat(jsonObject));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
                 try {
-                    label[2].setText(getGenStrat());
+                    label[2].setText(getGenStrat(jsonObject));
                 } catch (URISyntaxException | IOException e) {
                     e.printStackTrace();
                 }
@@ -276,13 +285,13 @@ public class Main extends Application {
             borderPanes[3].setRight(hbox);
             if (isMS()) {
                 try {
-                    label[3].setText(getHavenStrat());
+                    label[3].setText(getHavenStrat(jsonObject));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
                 try {
-                    label[3].setText(getGenStrat());
+                    label[3].setText(getGenStrat(jsonObject));
                 } catch (URISyntaxException | IOException e) {
                     e.printStackTrace();
                 }
@@ -298,13 +307,13 @@ public class Main extends Application {
             borderPanes[4].setRight(hbox);
             if (isMS()) {
                 try {
-                    label[4].setText(getIceboxStrat());
+                    label[4].setText(getIceboxStrat(jsonObject));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
                 try {
-                    label[4].setText(getGenStrat());
+                    label[4].setText(getGenStrat(jsonObject));
                 } catch (URISyntaxException | IOException e) {
                     e.printStackTrace();
                 }
@@ -318,7 +327,7 @@ public class Main extends Application {
             hbox.setPadding(new Insets(0, 50, 0, 0));
             borderPanes[5].setRight(hbox);
             try {
-                label[5].setText(getGenStrat());
+                label[5].setText(getGenStrat(jsonObject));
             } catch (URISyntaxException | IOException e) {
                 e.printStackTrace();
             }
@@ -336,143 +345,49 @@ public class Main extends Application {
     /**
      * Returns a random general strategy.
      */
-    private static String getGenStrat() throws IOException, URISyntaxException {
-        int counter = 0;
-        BufferedReader txtReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(Main.class.getResourceAsStream("/GenStrats.txt"))));
-        BufferedReader txtReader2 = new BufferedReader(new InputStreamReader(Objects.requireNonNull(Main.class.getResourceAsStream("/GenStrats.txt"))));
-
-        while (txtReader2.readLine() != null) counter++;
-
-        String[] strategies = new String[counter];
-        for (int i = 0; i < counter; i++) {
-            strategies[i] = txtReader.readLine();
-        }
-
-        int num = ThreadLocalRandom.current().nextInt(0, strategies.length + 1);
-
-        if (num < strategies.length) {
-            return strategies[num];
-        } else {
-            return strategies[strategies.length - 1];
-        }
+    private static String getGenStrat(JSONObject jsonObject) throws IOException, URISyntaxException {
+        JSONArray general = jsonObject.getJSONArray("General");
+        return (String) general.get(ThreadLocalRandom.current().nextInt(0, general.length()));
     }
 
     /**
      * Returns a random map-specific strategy for Split.
      */
-    private static String getSplitStrat() throws IOException {
-
-        int counter = 0;
-        BufferedReader txtReader = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Split Strats.txt")));
-        BufferedReader txtReader2 = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Split Strats.txt")));
-
-        while (txtReader2.readLine() != null) counter++;
-
-        String[] splitStrats = new String[counter];
-        for (int i = 0; i < counter; i++) {
-            splitStrats[i] = txtReader.readLine();
-        }
-
-        int num = ThreadLocalRandom.current().nextInt(0, splitStrats.length + 1);
-        if (num < splitStrats.length) {
-            return splitStrats[num];
-        } else {
-            return splitStrats[splitStrats.length - 1];
-        }
+    private static String getSplitStrat(JSONObject jsonObject) throws IOException {
+        JSONArray split = jsonObject.getJSONArray("Split");
+        return (String) split.get(ThreadLocalRandom.current().nextInt(0, split.length()));
     }
 
     /**
      * Returns a random map-specific strategy for Ascent.
      */
-    private static String getAscentStrat() throws IOException {
-
-        int counter = 0;
-        BufferedReader txtReader = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Ascent Strats.txt")));
-        BufferedReader txtReader2 = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Ascent Strats.txt")));
-
-        while (txtReader2.readLine() != null) counter++;
-
-        String[] ascentStrats = new String[counter];
-        for (int i = 0; i < counter; i++) {
-            ascentStrats[i] = txtReader.readLine();
-        }
-
-        int num = ThreadLocalRandom.current().nextInt(0, ascentStrats.length + 1);
-        if (num < ascentStrats.length) {
-            return ascentStrats[num];
-        } else {
-            return ascentStrats[ascentStrats.length - 1];
-        }
+    private static String getAscentStrat(JSONObject jsonObject) throws IOException {
+        JSONArray ascent = jsonObject.getJSONArray("Ascent");
+        return (String) ascent.get(ThreadLocalRandom.current().nextInt(0, ascent.length()));
     }
 
     /**
      * Returns a random map-specific strategy for Bind.
      */
-    private static String getBindStrat() throws IOException {
-        int counter = 0;
-        BufferedReader txtReader = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Bind Strats.txt")));
-        BufferedReader txtReader2 = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Bind Strats.txt")));
-
-        while (txtReader2.readLine() != null) counter++;
-
-        String[] bindStrats = new String[counter];
-        for (int i = 0; i < counter; i++) {
-            bindStrats[i] = txtReader.readLine();
-        }
-
-        int num = ThreadLocalRandom.current().nextInt(0, bindStrats.length + 1);
-        if (num < bindStrats.length) {
-            return bindStrats[num];
-        } else {
-            return bindStrats[bindStrats.length - 1];
-        }
+    private static String getBindStrat(JSONObject jsonObject) throws IOException {
+        JSONArray bind = jsonObject.getJSONArray("Bind");
+        return (String) bind.get(ThreadLocalRandom.current().nextInt(0, bind.length()));
     }
 
     /**
      * Returns a random map-specific strategy for Haven
      */
-    private static String getHavenStrat() throws IOException {
-        int counter = 0;
-        BufferedReader txtReader = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Haven Strats.txt")));
-        BufferedReader txtReader2 = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Haven Strats.txt")));
-
-        while (txtReader2.readLine() != null) counter++;
-
-        String[] havenStrats = new String[counter];
-        for (int i = 0; i < counter; i++) {
-            havenStrats[i] = txtReader.readLine();
-        }
-
-        int num = ThreadLocalRandom.current().nextInt(0, havenStrats.length + 1);
-        if (num < havenStrats.length) {
-            return havenStrats[num];
-        } else {
-            return havenStrats[havenStrats.length - 1];
-        }
+    private static String getHavenStrat(JSONObject jsonObject) throws IOException {
+        JSONArray haven = jsonObject.getJSONArray("Haven");
+        return (String) haven.get(ThreadLocalRandom.current().nextInt(0, haven.length()));
     }
 
     /**
      * Returns a random map-specific strategy for Icebox
      */
-    private static String getIceboxStrat() throws IOException {
-
-        int counter = 0;
-        BufferedReader txtReader = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Icebox Strats.txt")));
-        BufferedReader txtReader2 = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/Icebox Strats.txt")));
-
-        while (txtReader2.readLine() != null) counter++;
-
-        String[] iceboxStrats = new String[counter];
-        for (int i = 0; i < counter; i++) {
-            iceboxStrats[i] = txtReader.readLine();
-        }
-
-        int num = ThreadLocalRandom.current().nextInt(0, iceboxStrats.length + 1);
-        if (num < iceboxStrats.length) {
-            return iceboxStrats[num];
-        } else {
-            return iceboxStrats[iceboxStrats.length - 1];
-        }
+    private static String getIceboxStrat(JSONObject jsonObject) throws IOException {
+        JSONArray iceBox = jsonObject.getJSONArray("Icebox");
+        return (String) iceBox.get(ThreadLocalRandom.current().nextInt(0, iceBox.length()));
     }
 
     /**

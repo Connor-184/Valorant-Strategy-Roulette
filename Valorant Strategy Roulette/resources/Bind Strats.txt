@@ -1,5 +1,0 @@
-Everybody on the team must teleport at least once before anyone is allowed to shoot
-There must be one person inside of a teleporter at all times unless you are the last one alive
-Nobody on your team is allowed to use any teleporters this round
-Everytime you kill someone, you must use a teleporter before you can get another kill
-If you see an enemy use the teleporter, you must prioritize killing that enemy before killing anyone else
