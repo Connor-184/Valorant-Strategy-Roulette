@@ -3,7 +3,7 @@
     -fx-background-position: center center;
     -fx-background-repeat: stretch;
 }
-#borderPanes0 #borderpanes1 #borderpanes2 #borderpanes3 #borderpanes4 #borderpanes5 {
+#borderPanes0, #borderpanes1, #borderpanes2, #borderpanes3, #borderpanes4, #borderpanes5 {
     -fx-background-image: url('Valorant/Background2.jpg');
     -fx-background-position: center center;
     -fx-background-repeat: stretch;
@@ -49,18 +49,18 @@
     -fx-background-repeat: stretch;
     -fx-background-insets: 0, 0, 0, 0;
 }
-#stratText0 #stratText1 #stratText2 #stratText3 #stratText4 #stratText5 {
+#stratText0, #stratText1, #stratText2, #stratText3, #stratText4, #stratText5 {
     -fx-font-size: 30;
     -fx-font-weight: BOLD;
     -fx-text-fill: White;
 }
 
-#generateButtons0 #generateButtons1 #generateButtons2 #generateButtons3 #generateButtons4 #generateButtons5 {
+#generateButtons0, #generateButtons1, #generateButtons2, #generateButtons3, #generateButtons4, #generateButtons5 {
     -fx-font-size: 26;
     -fx-font-weight: BOLD;
 }
 
-#mainMenuButtons0 #mainMenuButtons1 #mainMenuButtons2 #mainMenuButtons3 #mainMenuButtons4 #mainMenuButtons5 {
+#mainMenuButtons0, #mainMenuButtons1, #mainMenuButtons2, #mainMenuButtons3, #mainMenuButtons4, #mainMenuButtons5 {
     -fx-font-size: 24;
     -fx-font-weight: BOLD;
     -fx-text-fill: Black;

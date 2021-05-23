@@ -18,6 +18,7 @@ import java.awt.*;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -337,8 +338,8 @@ public class Main extends Application {
      */
     private static String getGenStrat() throws IOException, URISyntaxException {
         int counter = 0;
-        BufferedReader txtReader = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/GenStrats.txt")));
-        BufferedReader txtReader2 = new BufferedReader(new InputStreamReader(Main.class.getResourceAsStream("/GenStrats.txt")));
+        BufferedReader txtReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(Main.class.getResourceAsStream("/GenStrats.txt"))));
+        BufferedReader txtReader2 = new BufferedReader(new InputStreamReader(Objects.requireNonNull(Main.class.getResourceAsStream("/GenStrats.txt"))));
 
         while (txtReader2.readLine() != null) counter++;
 
