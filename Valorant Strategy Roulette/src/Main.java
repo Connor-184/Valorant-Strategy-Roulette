@@ -14,7 +14,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
 import java.awt.*;
 import java.io.*;
 import java.net.URI;
@@ -42,27 +41,21 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        // Sets root style
-        String style = "-fx-background-image: url('Valorant/Background2.jpg');-fx-background-position: center center;" +
-                "-fx-background-repeat: stretch;";
-
         // Creates the different scenes and sets the primary stage
         BorderPane root1 = new BorderPane();
         Scene scene1 = new Scene(root1, width, height);
-        root1.setStyle("-fx-background-image: url('Valorant/Background.jpg');-fx-background-position: center center;" +
-                "-fx-background-repeat: stretch;");
 
         BorderPane[] borderPanes = new BorderPane[6];
         Scene[] scenes = new Scene[6];
         for (int i = 0; i < borderPanes.length; i++) {
             borderPanes[i] = new BorderPane();
             scenes[i] = new Scene(borderPanes[i], width, height);
-            borderPanes[i].setStyle(style);
+            borderPanes[i].setId("borderPanes" + i);
         }
 
         // Root 1 TOP
         Label label1 = new Label("");
-        label1.setStyle("-fx-font-size: 26; -fx-font-weight: BOLD;-fx-text-fill: White");
+        label1.setId("label1");
         VBox vbox1 = new VBox(label1);
         vbox1.setPadding(new Insets(100, 0, 10, 0));
         root1.setTop(vbox1);
@@ -70,16 +63,10 @@ public class Main extends Application {
 
         // Root 1 LEFT
         Button button1 = new Button();
-        button1.setStyle("-fx-background-image: url('Valorant/Split.jpg');-fx-background-position: center center;" +
-                "-fx-background-repeat: stretch;-fx-background-insets: 0, 0, 0, 0;");
         Button button2 = new Button();
-        button2.setStyle("-fx-background-image: url('Valorant/Bind.jpg');-fx-background-position: center center;" +
-                "-fx-background-repeat: stretch;-fx-background-insets: 0, 0, 0, 0;");
         button1.setMinSize(475, 210);
         button2.setMinSize(475, 210);
         Button button5 = new Button();
-        button5.setStyle("-fx-background-image: url('Valorant/Icebox.jpg');-fx-background-position: center center;" +
-                "-fx-background-repeat: stretch;-fx-background-insets: 0, 0, 0, 0;");
         button5.setMinSize(475, 210);
         VBox vbox2 = new VBox(50);
         vbox2.setPadding(new Insets(50, 0, 0, 30));
@@ -89,17 +76,11 @@ public class Main extends Application {
 
         // Root 1 RIGHT
         Button button3 = new Button();
-        button3.setStyle("-fx-background-image: url('Valorant/Ascent.jpg');-fx-background-position: center center;" +
-                "-fx-background-repeat: stretch;-fx-background-insets: 0, 0, 0, 0;");
         Button button4 = new Button();
-        button4.setStyle("-fx-background-image: url('Valorant/Haven.jpg');-fx-background-position: center center;" +
-                "-fx-background-repeat: stretch;-fx-background-insets: 0, 0, 0, 0;");
         button3.setMinSize(475, 210);
         button4.setMinSize(475, 210);
         Button button17 = new Button();
         button17.setMinSize(475, 210);
-        button17.setStyle("-fx-background-image: url('Valorant/Breeze.jpg');-fx-background-position: center center;" +
-                "-fx-background-repeat: stretch;-fx-background-insets: 0, 0, 0, 0;");
         VBox vbox3 = new VBox(50);
         vbox3.setPadding(new Insets(50, 30, 0, 0));
         vbox3.getChildren().addAll(button3, button4, button17);
@@ -146,7 +127,6 @@ public class Main extends Application {
         for (int i = 0; i < generateButtons.length; i++) {
             generateButtons[i] = new Button("Generate Strategy");
             generateButtons[i].setMinSize(250, 75);
-            generateButtons[i].setStyle("-fx-font-size: 26");
             HBox hbox = new HBox(generateButtons[i]);
             hbox.setPadding(new Insets(0, 0, 100, 0));
             hbox.setAlignment(Pos.BOTTOM_CENTER);
@@ -159,7 +139,6 @@ public class Main extends Application {
             label[i] = new Label("");
             label[i].setWrapText(true);
             label[i].setMaxWidth(500);
-            label[i].setStyle("-fx-font-size: 30; -fx-font-weight: BOLD;-fx-text-fill: White");
             VBox labelBox = new VBox(label[i]);
             labelBox.setPadding(new Insets(0, 0, 0, 50));
             labelBox.setAlignment(Pos.CENTER_LEFT);
@@ -170,11 +149,33 @@ public class Main extends Application {
         Button[] mainMenuButtons = new Button[scenes.length];
         for (int i = 0; i < scenes.length; i++) {
             mainMenuButtons[i] = new Button("Main Menu");
-            mainMenuButtons[i].setStyle("-fx-font-size: 24; -fx-font-weight: BOLD;-fx-text-fill: Black 0");
             HBox hbox = new HBox(mainMenuButtons[i]);
             hbox.setPadding(new Insets(20, 0, 0, 20));
             hbox.setAlignment(Pos.TOP_LEFT);
             borderPanes[i].setTop(hbox);
+        }
+
+        // Sets Ids and styles for each component
+        root1.setId("root1");
+        scene1.getStylesheets().add("Style.css");
+        for (Scene scene : scenes) {
+            scene.getStylesheets().add("Style.css");
+        }
+        label1.setId("label1");
+        button1.setId("button1");
+        button2.setId("button2");
+        button3.setId("button3");
+        button4.setId("button4");
+        button5.setId("button5");
+        button17.setId("button17");
+        for (int i = 0; i < label.length; i++) {
+            label[i].setId("stratText" + i);
+        }
+        for (int i = 0; i < generateButtons.length; i++) {
+            generateButtons[i].setId("generateButtons" + i);
+        }
+        for (int i = 0; i < mainMenuButtons.length; i++) {
+            mainMenuButtons[i].setId("mainMenuButtons" + i);
         }
 
         // Event handler for hyperlink

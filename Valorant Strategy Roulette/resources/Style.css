@@ -1,0 +1,160 @@
+#root1 {
+    -fx-background-image: url('Valorant/Background.jpg');
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;
+}
+#borderPanes0 {
+    -fx-background-image: url('Valorant/Background2.jpg');
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;
+}
+#borderPanes1 {
+    -fx-background-image: url('Valorant/Background2.jpg');
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;
+}
+#borderPanes2 {
+    -fx-background-image: url('Valorant/Background2.jpg');
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;
+}
+#borderPanes3 {
+    -fx-background-image: url('Valorant/Background2.jpg');
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;
+}
+#borderPanes4 {
+    -fx-background-image: url('Valorant/Background2.jpg');
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;
+}
+#borderPanes5 {
+    -fx-background-image: url('Valorant/Background2.jpg');
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;
+}
+#label1 {
+    -fx-font-size: 26;
+    -fx-font-weight: BOLD;
+    -fx-text-fill: White;
+}
+#button1 {
+    -fx-background-image: url('Valorant/Split.jpg');
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;
+    -fx-background-insets: 0, 0, 0, 0;
+}
+#button2 {
+    -fx-background-image: url('Valorant/Bind.jpg');
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;
+    -fx-background-insets: 0, 0, 0, 0;
+}
+#button3 {
+    -fx-background-image: url('Valorant/Ascent.jpg');
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;
+    -fx-background-insets: 0, 0, 0, 0;
+}
+#button4 {
+    -fx-background-image: url('Valorant/Haven.jpg');
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;
+    -fx-background-insets: 0, 0, 0, 0;
+}
+#button5 {
+    -fx-background-image: url('Valorant/Icebox.jpg');
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;
+    -fx-background-insets: 0, 0, 0, 0;
+}
+#button17 {
+    -fx-background-image: url('Valorant/Breeze.jpg');
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;
+    -fx-background-insets: 0, 0, 0, 0;
+}
+#stratText0 {
+    -fx-font-size: 30;
+    -fx-font-weight: BOLD;
+    -fx-text-fill: White;
+}
+#stratText1 {
+    -fx-font-size: 30;
+    -fx-font-weight: BOLD;
+    -fx-text-fill: White;
+}
+#stratText2 {
+    -fx-font-size: 30;
+    -fx-font-weight: BOLD;
+    -fx-text-fill: White;
+}
+#stratText3 {
+    -fx-font-size: 30;
+    -fx-font-weight: BOLD;
+    -fx-text-fill: White;
+}
+#stratText4 {
+    -fx-font-size: 30;
+    -fx-font-weight: BOLD;
+    -fx-text-fill: White;
+}
+#stratText5 {
+    -fx-font-size: 30;
+    -fx-font-weight: BOLD;
+    -fx-text-fill: White;
+}
+#generateButtons0 {
+    -fx-font-size: 26;
+    -fx-font-weight: BOLD;
+}
+#generateButtons1 {
+    -fx-font-size: 26;
+    -fx-font-weight: BOLD;
+}
+#generateButtons2 {
+    -fx-font-size: 26;
+    -fx-font-weight: BOLD;
+}
+#generateButtons3 {
+    -fx-font-size: 26;
+    -fx-font-weight: BOLD;
+}
+#generateButtons4 {
+    -fx-font-size: 26;
+    -fx-font-weight: BOLD;
+}
+#generateButtons5 {
+    -fx-font-size: 26;
+    -fx-font-weight: BOLD;
+}
+#mainMenuButtons0 {
+    -fx-font-size: 24;
+    -fx-font-weight: BOLD;
+    -fx-text-fill: Black;
+}
+#mainMenuButtons1 {
+    -fx-font-size: 24;
+    -fx-font-weight: BOLD;
+    -fx-text-fill: Black;
+}
+#mainMenuButtons2 {
+    -fx-font-size: 24;
+    -fx-font-weight: BOLD;
+    -fx-text-fill: Black;
+}
+#mainMenuButtons3 {
+    -fx-font-size: 24;
+    -fx-font-weight: BOLD;
+    -fx-text-fill: Black;
+}
+#mainMenuButtons4 {
+    -fx-font-size: 24;
+    -fx-font-weight: BOLD;
+    -fx-text-fill: Black;
+}
+#mainMenuButtons5 {
+    -fx-font-size: 24;
+    -fx-font-weight: BOLD;
+    -fx-text-fill: Black;
+}
